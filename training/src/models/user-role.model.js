@@ -1,36 +1,18 @@
 import mongoose from "mongoose";
-const Schema = mongoose.Schema;
+import { AuditlitySchema } from "./auditlity.model.js";
+const Shema = mongoose.Schema;
 
-const UserRoleSchema = Schema({
-    //_id : {type: mongoose.Schema.ObjectId,},
-    Name: { type: String, require: true },
-    Description: { type: String, default : ""},
-    Users: [{
-        type: mongoose.Schema.ObjectId,
-        require: true,
-        ref: "AppUser"
-    },],
-    CreatedBy: {
-        type: String
-    },
-    CreatedDate: {
-        type: Date,
-        require: true,
-        default: new Date()
-    },
-    UpdatedBy: {
-        type: String
-    },
-    UpdatedDate: {
-        type: Date,
-        require: true,
-        default: new Date()
-    }
+const UserRoleSchema = Shema({
+  Name: { type: String, require: true },
+  Description: { type: String, default: "" },
+  // Remark: Many to One (Relationship)
+  Users: [{
+    type: mongoose.Schema.ObjectId,
+    ref: "AppUser",
+  }],
+  ...AuditlitySchema
 });
 
-const UserRole = mongoose.model(
-    "AppUserRole",
-    UserRoleSchema
-)
+const UserRole = mongoose.model("AppUserRole", UserRoleSchema, "AppUserRole");
 
 export default UserRole;

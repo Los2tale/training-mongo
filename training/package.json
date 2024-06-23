@@ -2,25 +2,34 @@
   "name": "training",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "start": "npm run build && node dist/seed.js && node dist/bin/www",
+    "dev": "nodemon --exec babel-node -- ./bin/www.js",
+    "seed": "nodemon --exec babel-node seed.js",
+    "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files"
   },
   "dependencies": {
-    "@babel/cli": "^7.24.7",
-    "@babel/core": "^7.24.7",
-    "@babel/preset-env": "^7.24.7",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dotenv": "^16.4.5",
+    "esm": "^3.2.25",
     "express": "~4.16.1",
     "mongodb": "^6.7.0",
     "mongoose": "^8.4.3",
-    "mongoose-seed": "^0.6.0",
-    "morgan": "~1.9.1",
+    "mongoose-control": "^1.0.11",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.24.7",
+    "@babel/core": "^7.24.7",
+    "@babel/node": "^7.24.7",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
+    "@babel/preset-env": "^7.24.7",
+    "@babel/register": "^7.24.6",
     "nodemon": "^3.1.4",
     "rimraf": "^5.0.7"
   }

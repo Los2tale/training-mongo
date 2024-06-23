@@ -1,13 +1,11 @@
 import mongoose from "mongoose";
-import { APP_CONFIG } from "../viewmodel/app.config.js";
-
-//console.log(APP_CONFIG)
+import { APP_CONFIG } from "../viewmodels/app.config.js";
 
 mongoose.connect(
     APP_CONFIG.MONGO_CONNECTION
 ).then(()=>{
-    console.log('Successfilly connected to database')
+    console.log('Successfuly conected to database');
 }).catch((err)=>{
-    console.log('database connected failes')
+    console.log('database connected failed')
     console.error(err.message)
 })

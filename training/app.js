@@ -6,16 +6,19 @@ import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
 
 import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import './src/db/index.js'
+import cors from 'cors';
+import './src/db/index'
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-var app = express();
+const app = express();
 
 app.use(logger('dev'));
+app.use(
+    cors({
+        origin: '*',
+        methods: ['GET','POST','PUT','DELETE','UPDATE','PATCH'],
+        credentials: true
+    })
+)
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

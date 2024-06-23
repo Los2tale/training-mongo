@@ -1,13 +1,8 @@
 import dotenv from 'dotenv';
-
 import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const test = path.join(__dirname,"../..",'.env')
-const env = dotenv.config(test);
+const defaultPath = path.join(__dirname,"../..",'.env')
+const env = dotenv.config(defaultPath);
     
 export const APP_CONFIG = {
     MONGO_CONNECTION : env.parsed['MONGO_CONNECTION'] ?? '',
